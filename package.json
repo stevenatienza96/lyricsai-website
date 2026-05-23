@@ -1,0 +1,10 @@
+{
+  "name": "lyricsai-website",
+  "version": "1.0.0",
+  "private": true,
+  "description": "LyricsAI marketing site and download page",
+  "scripts": {
+    "sync-downloads": "node scripts/sync-downloads.mjs",
+    "dev": "npx serve ."
+  }
+}

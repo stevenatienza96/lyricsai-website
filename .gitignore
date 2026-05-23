@@ -1,0 +1,7 @@
+node_modules/
+.DS_Store
+*.log
+
+# Installers are large (>100 MB) — use GitHub Releases or run sync-downloads locally
+downloads/*.dmg
+downloads/*.exe
