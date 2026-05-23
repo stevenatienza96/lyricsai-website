@@ -12,10 +12,10 @@ function downloadUrl(platform) {
 
   if (config.downloadSource === "external" && config.downloadsBaseUrl) {
     const base = config.downloadsBaseUrl.replace(/\/+$/, "");
-    return `${base}/${item.file}`;
+    return `${base}/${encodeURIComponent(item.file)}`;
   }
 
-  return `/downloads/${item.file}`;
+  return `/downloads/${encodeURIComponent(item.file)}`;
 }
 
 function bindDownload(id, platform) {

@@ -8,7 +8,7 @@ window.LYRICSAI_SITE = {
   downloadSource: "external",
 
   // Cloudflare R2 public URL — see docs/R2-SETUP.md
-  downloadsBaseUrl: "https://pub-fd76918315fb4776a9d456525478a875.r2.dev/lyricsai",
+  downloadsBaseUrl: "https://pub-fd76918315fb4776a9d456525478a875.r2.dev",
 
   releaseTag: "v1.0.0",
   githubRepo: "stevenatienza96/lyricsai-website",
@@ -24,7 +24,7 @@ window.LYRICSAI_SITE = {
       // url: "https://example.com/LyricsAI-1.0.0.dmg",
     },
     win: {
-      file: "LyricsAI-Setup-1.0.0.exe",
+      file: "LyricsAI Setup 1.0.0.exe",
       label: "Windows 10+",
       size: "104 MB",
     },
