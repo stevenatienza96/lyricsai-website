@@ -7,5 +7,5 @@
     "sync-downloads": "node scripts/sync-downloads.mjs",
     "dev": "npx serve .",
     "deploy": "npm run sync-downloads && npx vercel deploy --prod"
-  },
+  }
 }
