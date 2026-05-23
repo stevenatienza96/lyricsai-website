@@ -1,0 +1,15 @@
+# App screenshots
+
+Drop PNG or JPG files here, then add them to `site-config.js`:
+
+```js
+screenshots: [
+  {
+    src: "./assets/screenshots/main-ui.png",
+    alt: "LyricsAI main window",
+    caption: "Control panel with song queue and live preview",
+  },
+],
+```
+
+Recommended: 2–4 screenshots (main UI, live output, Bible/Sermon tab, slide queue).
