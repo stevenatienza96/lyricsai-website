@@ -8,7 +8,7 @@ window.LYRICSAI_SITE = {
   downloadSource: "external",
 
   // Cloudflare R2 public URL — see docs/R2-SETUP.md
-  downloadsBaseUrl: "https://downloads.lyricsai.cc",
+  downloadsBaseUrl: "https://lyricsai.cc",
 
   releaseTag: "v1.0.0",
   githubRepo: "stevenatienza96/lyricsai-website",
