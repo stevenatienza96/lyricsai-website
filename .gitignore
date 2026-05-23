@@ -1,6 +1,10 @@
 node_modules/
 .DS_Store
 *.log
+
+# Host installers on CDN (R2, Bunny, etc.) — not in Git
+downloads/*.dmg
+downloads/*.exe
 <<<<<<< HEAD
 downloads/
 =======

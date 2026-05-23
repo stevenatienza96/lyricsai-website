@@ -2,8 +2,13 @@
 window.LYRICSAI_SITE = {
   version: "1.0.0",
 
-  // Set to "vercel" (files in /downloads/ on deploy) or "github" (Release assets).
-  downloadSource: "vercel",
+  // "external" = files hosted elsewhere (R2, Bunny, Drive, etc.)
+  // "vercel"   = /downloads/ on same Vercel deploy (CLI deploy only)
+  // "github"   = GitHub Releases
+  downloadSource: "external",
+
+  // Cloudflare R2 public URL — see docs/R2-SETUP.md
+  downloadsBaseUrl: "https://pub-YOUR-ID.r2.dev",
 
   releaseTag: "v1.0.0",
   githubRepo: "stevenatienza96/lyricsai-website",
@@ -15,6 +20,8 @@ window.LYRICSAI_SITE = {
       file: "LyricsAI-1.0.0.dmg",
       label: "macOS 12+",
       size: "128 MB",
+      // Or set a full URL to override downloadsBaseUrl + file:
+      // url: "https://example.com/LyricsAI-1.0.0.dmg",
     },
     win: {
       file: "LyricsAI-Setup-1.0.0.exe",
