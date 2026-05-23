@@ -14,17 +14,23 @@ Sign up at [dash.cloudflare.com](https://dash.cloudflare.com) (free).
 4. Location: pick the region closest to your users
 5. Create
 
-## 3. Enable public access
+## 3. Enable public access (important)
 
 1. Open your bucket → **Settings**
-2. Under **Public access**, enable **R2.dev subdomain** (or connect a custom domain later)
-3. Copy the public URL, e.g. `https://pub-abc123def456.r2.dev`
+2. Find **Public Development URL** (not just Custom Domains)
+3. Click **Enable**
+4. Type `allow` and confirm **Allow**
+5. **Public URL Access** must show **Allowed**
+6. Copy the URL shown, e.g. `https://pub-fd76918315fb4776a9d456525478a875.r2.dev`
 
-If you use a **path prefix** when uploading (e.g. `v1/LyricsAI-1.0.0.dmg`), include that in `downloadsBaseUrl`:
+> The base URL alone (`https://pub-….r2.dev`) will **not** show a webpage — that is normal.  
+> You must open a **file URL** (step 5 below).
 
-```js
-downloadsBaseUrl: "https://pub-abc123def456.r2.dev/v1",
-```
+### If the site “takes too long to respond”
+
+- Public access is probably **not enabled** — repeat step 3 and confirm **Allowed**
+- Or files were **not uploaded** yet
+- `r2.dev` is **dev-only** and can be slow/unreliable — for production use a **Custom Domain** (see below)
 
 ## 4. Upload the installers
 
@@ -34,9 +40,12 @@ downloadsBaseUrl: "https://pub-abc123def456.r2.dev/v1",
 2. Upload from `lyricsai-website/downloads/`:
    - `LyricsAI-1.0.0.dmg`
    - `LyricsAI-Setup-1.0.0.exe`
-3. Test in browser:
+3. Test **exact file URLs** in your browser (not the bucket root):
+
    - `https://pub-YOUR-ID.r2.dev/LyricsAI-1.0.0.dmg`
-   - Should start downloading
+   - `https://pub-YOUR-ID.r2.dev/LyricsAI-Setup-1.0.0.exe`
+
+   Each should **start downloading**. 404 = wrong file name. Hangs = public access off.
 
 ### Option B — Wrangler CLI
 
@@ -70,6 +79,24 @@ Push to GitHub. Vercel redeploys automatically.
 ## 6. Verify
 
 Open your live site → **Download for macOS / Windows** → file should download from R2.
+
+---
+
+## Production: use a Custom Domain (recommended)
+
+`r2.dev` is rate-limited and can timeout. For reliable downloads:
+
+1. R2 bucket → **Settings** → **Custom Domains** → **Connect Domain**
+2. Use a subdomain you own, e.g. `downloads.yourdomain.com`
+3. Update `site-config.js`:
+
+```js
+downloadsBaseUrl: "https://downloads.yourdomain.com",
+```
+
+4. Re-upload files (same names) if needed
+
+You need the domain on Cloudflare (free plan is fine).
 
 ---
 
