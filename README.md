@@ -2,66 +2,73 @@
 
 Marketing and download page for the **licensed** LyricsAI desktop app.
 
+## Fix missing downloads (404)
+
+Installers are **not in Git** (each file is >100 MB). A normal `git push` deploy to Vercel only uploads the website — not the DMG/EXE.
+
+### Option A — Vercel CLI (works with a **private** GitHub repo)
+
+Upload installers directly to Vercel:
+
+```bash
+cd lyricsai-website
+npm run deploy
+```
+
+First time: `npx vercel login` and link the project when prompted.
+
+In `site-config.js` keep:
+
+```js
+downloadSource: "vercel",
+```
+
+Re-run `npm run deploy` whenever you ship a new app version.
+
+### Option B — GitHub Releases (repo must be **public** for customers)
+
+Private repos hide release files from the public. Make the repo public, then:
+
+```bash
+chmod +x scripts/publish-github-release.sh
+./scripts/publish-github-release.sh 1.0.0
+```
+
+In `site-config.js` set:
+
+```js
+downloadSource: "github",
+releaseTag: "v1.0.0",
+githubRepo: "stevenatienza96/lyricsai-website",
+```
+
+Push the config change. Downloads use GitHub’s CDN.
+
 ## Local preview
 
 ```bash
 npm run dev
 ```
 
-Open http://localhost:3000
+Place installers in `downloads/` (or run `npm run sync-downloads` from `../lyric-slides/release-licensed`).
 
 ## Sync installers from lyric-slides
 
-After building the subscription release in `../lyric-slides`:
-
 ```bash
+# Build licensed app first
+cd ../lyric-slides && npm run dist:all:subscription
+
+cd ../lyricsai-website
 npm run sync-downloads
 ```
-
-This copies `LyricsAI-1.0.0.dmg` and `LyricsAI-Setup-1.0.0.exe` into `downloads/`.
-
-## Deploy to Vercel
-
-1. Push this repo to GitHub.
-2. Import the project at [vercel.com/new](https://vercel.com/new).
-3. Deploy (static site — no build command needed).
-
-### Large download files (>100 MB)
-
-Installers exceed GitHub’s 100 MB per-file limit. Recommended options:
-
-**Option A — GitHub Releases (recommended)**  
-Upload the DMG and EXE as release assets, then set full URLs in `site-config.js`:
-
-```js
-downloads: {
-  mac: { url: "https://github.com/YOU/lyricsai-website/releases/download/v1.0.0/LyricsAI-1.0.0.dmg", ... },
-  win: { url: "https://github.com/YOU/lyricsai-website/releases/download/v1.0.0/LyricsAI-Setup-1.0.0.exe", ... },
-}
-```
-
-**Option B — Host on Vercel**  
-Keep files in `downloads/` and deploy. Note Vercel deployment size limits on free plans.
-
-**Option C — Git LFS**  
-Track `downloads/*` with Git LFS if you want binaries in the repo.
 
 ## Structure
 
 ```
 lyricsai-website/
-  index.html       Landing page
-  styles.css       Styles
-  main.js          Download link wiring
-  site-config.js   Version + download URLs (edit on each release)
-  assets/          Logo
-  downloads/       Installers (synced from release-licensed)
-  vercel.json      Headers for download attachments
+  site-config.js   downloadSource: "vercel" | "github"
+  downloads/       Installers (local + Vercel CLI deploy, not in Git)
+  scripts/
+    sync-downloads.mjs
+    publish-github-release.sh
 ```
-
-## Updating a release
-
-1. Build licensed app: `cd ../lyric-slides && npm run dist:all:subscription`
-2. Sync: `npm run sync-downloads`
-3. Bump `version` and URLs in `site-config.js`
-4. Deploy or publish GitHub Release assets

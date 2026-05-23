@@ -1,20 +1,23 @@
 /** @type {import('./site-config.d.ts').SiteConfig} */
 window.LYRICSAI_SITE = {
   version: "1.0.0",
-  screenshots: [
-    // Add entries when you have images in assets/screenshots/:
-    // { src: "./assets/screenshots/main-ui.png", alt: "LyricsAI control panel", caption: "Song queue, live preview, and slide editor" },
-  ],
+
+  // Set to "vercel" (files in /downloads/ on deploy) or "github" (Release assets).
+  downloadSource: "vercel",
+
+  releaseTag: "v1.0.0",
+  githubRepo: "stevenatienza96/lyricsai-website",
+
+  screenshots: [],
+
   downloads: {
     mac: {
-      // Relative path for Vercel/local, or full URL for GitHub Releases:
-      // url: "https://github.com/YOUR_USER/lyricsai-website/releases/download/v1.0.0/LyricsAI-1.0.0.dmg",
-      url: "/downloads/LyricsAI-1.0.0.dmg",
+      file: "LyricsAI-1.0.0.dmg",
       label: "macOS 12+",
       size: "128 MB",
     },
     win: {
-      url: "/downloads/LyricsAI-Setup-1.0.0.exe",
+      file: "LyricsAI-Setup-1.0.0.exe",
       label: "Windows 10+",
       size: "104 MB",
     },

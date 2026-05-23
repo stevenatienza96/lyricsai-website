@@ -5,6 +5,7 @@
   "description": "LyricsAI marketing site and download page",
   "scripts": {
     "sync-downloads": "node scripts/sync-downloads.mjs",
-    "dev": "npx serve ."
-  }
+    "dev": "npx serve .",
+    "deploy": "npm run sync-downloads && npx vercel deploy --prod"
+  },
 }

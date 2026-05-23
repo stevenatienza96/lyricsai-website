@@ -1,10 +1,20 @@
 const config = window.LYRICSAI_SITE;
 
+function downloadUrl(platform) {
+  const item = config?.downloads?.[platform];
+  if (!item?.file) return "#";
+
+  if (config.downloadSource === "github" && config.githubRepo && config.releaseTag) {
+    return `https://github.com/${config.githubRepo}/releases/download/${config.releaseTag}/${item.file}`;
+  }
+
+  return `/downloads/${item.file}`;
+}
+
 function bindDownload(id, platform) {
   const el = document.getElementById(id);
-  if (!el || !config?.downloads?.[platform]) return;
-  const item = config.downloads[platform];
-  el.href = item.url;
+  if (!el) return;
+  el.href = downloadUrl(platform);
   el.setAttribute("download", "");
 }
 
