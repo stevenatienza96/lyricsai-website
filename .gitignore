@@ -1,7 +1,11 @@
 node_modules/
 .DS_Store
 *.log
+<<<<<<< HEAD
+downloads/
+=======
 
 # Installers are large (>100 MB) — use GitHub Releases or run sync-downloads locally
 downloads/*.dmg
 downloads/*.exe
+>>>>>>> parent of d8d115a (Add licensed app installers via Git LFS and GitHub download links.)
